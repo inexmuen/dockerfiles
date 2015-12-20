@@ -4,4 +4,5 @@
 
 ## list
 
-* [利用docker构建mysql集群](mysql-cluster/README.md)
+* [利用docker构建mysql集群](mysql_cluster/README.md)
+* [php in docker](php_in_docker/README.md)
