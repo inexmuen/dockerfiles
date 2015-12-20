@@ -18,11 +18,12 @@ EXPOSE 3306
 CMD ["/usr/bin/mysqld_safe"]
 ```
 
-## 利用`Dockerfile`构建两个image
+## 利用`Dockerfile`构建三个image
 
 ```
 # docker build -t mysql_server_1 .
 # docker build -t mysql_server_2 .
+# docker build -t mysql_server_3 .
 ```
 
 ## 启动container
@@ -32,6 +33,7 @@ CMD ["/usr/bin/mysqld_safe"]
 ```
 # docker run --name=mysqlserver1 -d -p 3307:3306 mysql_server_1
 # docker run --name=mysqlserver2 -d -p 3308:3306 mysql_server_2
+# docker run --name=mysqlserver3 -d -p 3309:3306 mysql_server_3
 ```
 
 ### 2.使用`docker-compose`[推荐]
