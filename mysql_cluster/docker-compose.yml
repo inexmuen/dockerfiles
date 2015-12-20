@@ -9,3 +9,9 @@ mysql2:
     ports:
         - "3308:3306"
     privileged: true
+
+mysql3:
+    image: mysql_server_3 
+    ports:
+        - "3309:3306"
+    privileged: true

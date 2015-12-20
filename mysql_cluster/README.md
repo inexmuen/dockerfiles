@@ -27,14 +27,14 @@ CMD ["/usr/bin/mysqld_safe"]
 
 ## 启动container
 
-### 使用`docker`命令
+### 1.使用`docker`命令
 
 ```
 # docker run --name=mysqlserver1 -d -p 3307:3306 mysql_server_1
 # docker run --name=mysqlserver2 -d -p 3308:3306 mysql_server_2
 ```
 
-### 使用`docker-compose`
+### 2.使用`docker-compose`[推荐]
 
 `docker-composer.yml`文件如下:
 
@@ -51,6 +51,12 @@ mysql2:
         - "3308:3306"
     privileged: true
 
+mysql3:
+    image: mysql_server_3 
+    ports:
+        - "3309:3306"
+    privileged: true
+
 ```
 
 ```
@@ -64,9 +70,10 @@ mysql2:
 
 ```
 # docker ps
-CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS              PORTS                    NAMES
-cc18adce78b5        mysql_server_2:latest   "/usr/bin/mysqld_saf   39 seconds ago      Up 20 seconds       0.0.0.0:3308->3306/tcp   mysqlcluster_mysql2_1
-806a23c376ad        mysql_server_1:latest   "/usr/bin/mysqld_saf   39 seconds ago      Up 20 seconds       0.0.0.0:3307->3306/tcp   mysqlcluster_mysql1_1
+CONTAINER ID        IMAGE                   COMMAND                CREATED              STATUS              PORTS                    NAMES
+0c49ffc8eebb        mysql_server_3:latest   "/usr/bin/mysqld_saf   About a minute ago   Up About a minute   0.0.0.0:3309->3306/tcp   mysqlcluster_mysql3_1
+5e00ec1011cd        mysql_server_2:latest   "/usr/bin/mysqld_saf   About a minute ago   Up About a minute   0.0.0.0:3308->3306/tcp   mysqlcluster_mysql2_1
+d571faf67466        mysql_server_1:latest   "/usr/bin/mysqld_saf   About a minute ago   Up About a minute   0.0.0.0:3307->3306/tcp   mysqlcluster_mysql1_1
 ```
 
 ### 连接mysql
@@ -86,16 +93,17 @@ cc18adce78b5        mysql_server_2:latest   "/usr/bin/mysqld_saf   39 seconds ag
 ```
 # mysql -uroot -p
 # grant all privileges on *.* to 'eleme'@'%' identified by 'eleme';
-# flush privileges
+# flush privileges;
 ```
 
-`mysqlcluster_mysql1_1`和`mysqlcluster_mysql2_1 `均使用以上操作重新grant
+`mysqlcluster_mysql1_1`和`mysqlcluster_mysql2_1`和`mysqlcluster_mysql3_1`均使用以上操作重新grant
 
 在host中连接mysql container:
 
 ```
-mysql -ueleme -p -P3307
-mysql -ueleme -p -P3308
+mysql -ueleme -peleme -P3307
+mysql -ueleme -peleme -P3308
+mysql -ueleme -peleme -P3309
 ```
 
 OK
