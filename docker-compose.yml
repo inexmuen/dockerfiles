@@ -1,0 +1,25 @@
+dev:
+    image: docker.elenet.me/zhihua.he/eos_dev
+    
+    volumes:
+        - /Users/joshua/www/eos:/srv/ves/zeus.eos
+        - /Users/joshua/www/chronos:/srv/ves/osc.chronos
+        - /Users/joshua/www/buckler:/srv/ves/osc.buckler
+    ports:
+        - "15000:15000"
+    links:
+        - redis:dev_redis
+        - mysql:dev_mysql
+    privileged: true
+
+redis:
+    image: docker.elenet.me/zhihua.he/eos_redis
+    ports:
+        - "6379:6379"
+    privileged: true
+
+mysql:
+    image: docker.elenet.me/zhihua.he/eos_mysql
+    ports:
+        - "3306:3306"
+    privileged: true
