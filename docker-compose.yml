@@ -1,5 +1,5 @@
 dev:
-    image: docker.elenet.me/zhihua.he/eos_dev
+    image: docker.elenet.me/zhihua.he/eos_dev:1109
     
     volumes:
         - /Users/joshua/www/eos:/srv/ves/zeus.eos
